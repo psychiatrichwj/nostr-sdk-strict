@@ -1,0 +1,11 @@
+{
+  "name": "nostr-utils",
+  "version": "0.0.1",
+  "author": "Song Z <songz@duck.com>",
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "@noble/hashes": "^1.4.0",
+    "@noble/secp256k1": "^2.0.0"
+  }
+}
