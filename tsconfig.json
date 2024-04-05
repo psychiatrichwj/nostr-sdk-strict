@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "target": "es5",
+      "target": "ESNext",
       "lib": ["dom", "dom.iterable", "esnext"],
       "allowJs": true,
       "skipLibCheck": true,
@@ -18,6 +18,8 @@
       "paths": {
         "nostr-utils": ["packages/utils/src"],
         "nostr-utils/*": ["packages/utils/src/*"],
+        "nostr-relay": ["packages/relay/src"],
+        "nostr-relay/*": ["packages/relay/src/*"],
         "nostr-messages": ["packages/messages/src"],
         "nostr-messages/*": ["packages/messages/src/*"],
       },

@@ -7,7 +7,6 @@ import { z } from "zod";
 import { Event } from "./events";
 import { isReplaceableKind } from "./kind";
 import { hexStringAnyLenSchema, hex32Schema } from ".";
-import { senderToBytes } from "./sender";
 
 export const tagFilterSchema = z.record(
   z.string().startsWith("#"),
@@ -46,11 +45,9 @@ const matchOneTag = (
 };
 
 export function matchFilterExceptTags(filter: Filter, event: Event): boolean {
-  const eventAuthor = senderToBytes(event.sender).substring(2);
-
   if (filter.ids && filter.ids.indexOf(event.id) === -1) return false;
   if (filter.kinds && filter.kinds.indexOf(event.kind) === -1) return false;
-  if (filter.authors && filter.authors.indexOf(eventAuthor) === -1)
+  if (filter.authors && filter.authors.indexOf(event.sender) === -1)
     return false;
   if (filter.since && event.created_at < filter.since) return false;
   if (filter.until && event.created_at > filter.until) return false;

@@ -12,3 +12,4 @@ export const hexStringSchema = (len: number) =>
 export const hexStringAnyLenSchema = () => z.string().regex(/^[a-fA-F0-9]+$/);
 
 export const hex32Schema = hexStringSchema(32);
+export type Hex32 = z.infer<typeof hex32Schema>;

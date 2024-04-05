@@ -2,9 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { Hex } from "viem";
+import type { Hex32 } from ".";
 
 import { z } from "zod";
-import { Sender, senderSchema } from "./sender";
+import { Sender, senderToBytes } from "./sender";
 import { sha256Hash } from "nostr-utils/crypto";
 import { toHex } from "viem";
 import { hex32Schema, hexStringAnyLenSchema } from ".";
@@ -15,7 +16,7 @@ export const eventSchema = z.object({
   content: z.string(),
   created_at: z.number().int().positive().safe(),
 
-  sender: senderSchema,
+  sender: hexStringAnyLenSchema(),
   id: hex32Schema,
   sig: hexStringAnyLenSchema(),
 });
@@ -28,7 +29,6 @@ export const partialEventSchema = eventSchema.partial({
 
 export type PartialEvent = z.infer<typeof partialEventSchema>;
 export type Event = z.infer<typeof eventSchema>;
-export type Hex32 = z.infer<typeof hex32Schema>;
 
 export function eventToId(e: PartialEvent): Hex32 {
   const serializedEvent = JSON.stringify([
@@ -39,11 +39,14 @@ export function eventToId(e: PartialEvent): Hex32 {
     e.tags,
     e.content,
   ]);
+
+  console.log(serializedEvent)
   const hash = sha256Hash(new TextEncoder().encode(serializedEvent));
   return hex32Schema.parse(toHex(hash).substring(2));
 }
 
 export function buildEvent(e: PartialEvent, sender: Sender, sig: Hex): Event {
+  e.sender = senderToBytes(sender).substring(2);
   const id = eventToId(e);
   const s = hexStringAnyLenSchema().parse(sig.substring(2));
 
@@ -54,7 +57,7 @@ export function buildEvent(e: PartialEvent, sender: Sender, sig: Hex): Event {
     created_at: e.created_at,
 
     id,
-    sender,
+    sender: e.sender,
     sig: s.substring(2),
   });
 }

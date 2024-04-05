@@ -30,23 +30,23 @@ export function senderToBytes(s: Sender): Hex {
   switch (s.type) {
     case "SchnorrPubkey":
       t = 0;
-      data = s.data;
+      data = s.data.toLowerCase();
       break;
     case "EoaAddress":
       t = 1;
-      data = s.data;
+      data = s.data.toLowerCase();
       break;
     case "ContractAddress":
       t = 2;
-      data = s.data;
+      data = s.data.toLowerCase();
       break;
     case "Ens":
       t = 3;
-      data = s.data;
+      data = s.data.toLowerCase();
       break;
   }
 
-  return encodePacked(["bytes4", "bytes"], [toHex(u32ToU8a(t)), toHex(data)]);
+  return encodePacked(["bytes4", "bytes"], [toHex(u32ToU8a(t)), `0x${data}`]);
 }
 
 export function bytesToSender(bytes: Hex) {
@@ -58,12 +58,12 @@ export function bytesToSender(bytes: Hex) {
 
   switch (t) {
     case 0:
-      return { type: "SchnorrPubkey", data: toHex(data) };
+      return senderSchema.parse({ type: "SchnorrPubkey", data: data });
     case 1:
-      return { type: "EoaAddress", data: toHex(data) };
+      return senderSchema.parse({ type: "EoaAddress", data: data });
     case 2:
-      return { type: "ContractAddress", data: toHex(data) };
+      return senderSchema.parse({ type: "ContractAddress", data: data });
     case 3:
-      return { type: "Ens", data: toHex(data) };
+      return senderSchema.parse({ type: "Ens", data: data });
   }
 }

@@ -27,6 +27,17 @@ importers:
         specifier: ^3.22.4
         version: 3.22.4
 
+  packages/relay:
+    dependencies:
+      nostr-messages:
+        specifier: 0.0.1
+        version: link:../messages
+      nostr-utils:
+        specifier: 0.0.1
+        version: link:../utils
+
+  packages/subscription: {}
+
   packages/utils:
     dependencies:
       '@noble/hashes':
