@@ -4,7 +4,6 @@
   "main": "./src/index.ts",
   "author": "Song Z <songz@duck.com>",
   "license": "Apache-2.0",
-  "private": "true",
   "dependencies": {
     "nostr-utils": "0.0.1",
     "nostr-messages": "0.0.1"

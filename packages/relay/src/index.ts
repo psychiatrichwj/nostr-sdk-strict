@@ -313,8 +313,3 @@ export type EventPublishResolver = {
   resolve: (reason: string) => void
   reject: (err: Error) => void
 }
-
-export const world = () => {
-
-  console.log("Hello");
-}
