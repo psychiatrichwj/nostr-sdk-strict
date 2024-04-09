@@ -34,10 +34,10 @@ export class Relay {
   public baseEoseTimeout: number = 4400
   public connectionTimeout: number = 4400
   public openSubs: Map<string, Subscription> = new Map()
-  
+
   public onclose: (() => void) | null = null
   public onnotice: (msg: string) => void = msg => console.debug(`NOTICE from ${this.url}: ${msg}`)
-  
+
   private connectionTimeoutHandle: ReturnType<typeof setTimeout> | undefined
 
   private connectionPromise: Promise<void> | undefined
@@ -48,7 +48,7 @@ export class Relay {
   private queueRunning = false
   private challenge: string | undefined
   private serial: number = 0
-  
+
   constructor(url: string) {
     this.url = normalizeURL(url);
   }
@@ -312,4 +312,9 @@ export type CountResolver = {
 export type EventPublishResolver = {
   resolve: (reason: string) => void
   reject: (err: Error) => void
+}
+
+export const world = () => {
+
+  console.log("Hello");
 }
