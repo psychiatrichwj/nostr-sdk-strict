@@ -35,13 +35,8 @@ describe("Filter", () => {
     test("should return true when all filter conditions are met", () => {
       const filter = filterSchema.parse({
         ids: [
-          "7cd8211c6264d2f2ea2d71aea903740ef6ec7f9640c77d3e3057c7d266e0070b",
-          "0000000000000000000000000000000000000000000000000000000000000000",
-          // TODO(@song.zhou): Please help me to confirm if this is the correct fix
-          // for this test case, the test case is failing because the ids in the
-          // filter is not matching the id in event, I copied the id from event to
-          // make this test pass
           "bd2c3a45b2fdacaa6df14bf714e62f542f37a2fed9ba9b25497b231230cab803",
+          "0000000000000000000000000000000000000000000000000000000000000000",
         ],
         kinds: [1, 2, 3],
         authors: [senderToBytes(sender).substring(2)],
@@ -104,7 +99,7 @@ describe("Filter", () => {
       const filters = [
         {
           ids: [
-            "7cd8211c6264d2f2ea2d71aea903740ef6ec7f9640c77d3e3057c7d266e0070b",
+            "bd2c3a45b2fdacaa6df14bf714e62f542f37a2fed9ba9b25497b231230cab803",
           ],
           kinds: [1],
           authors: [senderToBytes(sender).substring(2)],
@@ -116,15 +111,11 @@ describe("Filter", () => {
           kinds: [2],
           authors: ["0123"],
         },
-        // TODO(@song.zhou): Please help me to confirm if this is the correct fix
-        // for this test case, the test case is failing because the ids, kinds, authors
-        // are not matching the id, kind, author in event, I copied the id from event to
-        // make this test pass
         {
           ids: [
-            "bd2c3a45b2fdacaa6df14bf714e62f542f37a2fed9ba9b25497b231230cab803",
+            "0000000000000000000000000000000000000000000000000000000000000000",
           ],
-          kinds: [1],
+          kinds: [3],
           authors: ["010000004838b106fce9647bdf1e7877bf73ce8b0bad5f97"],
         },
       ];
