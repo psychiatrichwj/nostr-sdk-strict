@@ -36,8 +36,6 @@ importers:
         specifier: 0.0.1
         version: link:../utils
 
-  packages/subscription: {}
-
   packages/utils:
     dependencies:
       '@noble/hashes':
