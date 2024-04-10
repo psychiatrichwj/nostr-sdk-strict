@@ -47,8 +47,9 @@ const matchOneTag = (
 export function matchFilterExceptTags(filter: Filter, event: Event): boolean {
   if (filter.ids && filter.ids.indexOf(event.id) === -1) return false;
   if (filter.kinds && filter.kinds.indexOf(event.kind) === -1) return false;
-  if (filter.authors && filter.authors.indexOf(event.sender) === -1)
+  if (filter.authors && filter.authors.indexOf(event.sender) === -1) {
     return false;
+  }
   if (filter.since && event.created_at < filter.since) return false;
   if (filter.until && event.created_at > filter.until) return false;
 
@@ -56,7 +57,9 @@ export function matchFilterExceptTags(filter: Filter, event: Event): boolean {
 }
 
 export function matchFilter(filter: Filter, event: Event): boolean {
-  if (!matchFilterExceptTags(filter, event)) return false;
+  if (!matchFilterExceptTags(filter, event)) {
+    return false;
+  }
 
   const tags = filter.tags;
   for (const f in tags) {
