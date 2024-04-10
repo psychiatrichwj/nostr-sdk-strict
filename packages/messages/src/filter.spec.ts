@@ -35,7 +35,7 @@ describe("Filter", () => {
     test("should return true when all filter conditions are met", () => {
       const filter = filterSchema.parse({
         ids: [
-          "7cd8211c6264d2f2ea2d71aea903740ef6ec7f9640c77d3e3057c7d266e0070b",
+          "bd2c3a45b2fdacaa6df14bf714e62f542f37a2fed9ba9b25497b231230cab803",
           "0000000000000000000000000000000000000000000000000000000000000000",
         ],
         kinds: [1, 2, 3],
@@ -99,7 +99,7 @@ describe("Filter", () => {
       const filters = [
         {
           ids: [
-            "7cd8211c6264d2f2ea2d71aea903740ef6ec7f9640c77d3e3057c7d266e0070b",
+            "bd2c3a45b2fdacaa6df14bf714e62f542f37a2fed9ba9b25497b231230cab803",
           ],
           kinds: [1],
           authors: [senderToBytes(sender).substring(2)],
@@ -116,7 +116,7 @@ describe("Filter", () => {
             "0000000000000000000000000000000000000000000000000000000000000000",
           ],
           kinds: [3],
-          authors: ["0123"],
+          authors: ["010000004838b106fce9647bdf1e7877bf73ce8b0bad5f97"],
         },
       ];
 
