@@ -1,6 +1,9 @@
-name: tests
-run-name: Run tests and lints
-on: [push]
+name: release
+run-name: Publish new version of library
+on:
+  push:
+    branches:
+      - 'main'
 jobs:
   run-tests:
     env:
@@ -20,4 +23,5 @@ jobs:
       - run: npm install -g pnpm
       - run: pnpm install
       - run: pnpm run test
+      - run: pnpm run publish
       - run: pnpm run lint

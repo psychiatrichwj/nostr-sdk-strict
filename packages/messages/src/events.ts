@@ -40,7 +40,6 @@ export function eventToId(e: PartialEvent): Hex32 {
     e.content,
   ]);
 
-  console.log(serializedEvent)
   const hash = sha256Hash(new TextEncoder().encode(serializedEvent));
   return hex32Schema.parse(toHex(hash).substring(2));
 }
