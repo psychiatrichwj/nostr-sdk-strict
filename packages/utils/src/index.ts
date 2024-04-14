@@ -62,37 +62,46 @@ export function u8aToU32(byteArray: Uint8Array): number {
 }
 
 export function normalizeURL(url: string): string {
-  if (url.indexOf('://') === -1) url = 'wss://' + url
-  let p = new URL(url)
-  p.pathname = p.pathname.replace(/\/+/g, '/')
-  if (p.pathname.endsWith('/')) p.pathname = p.pathname.slice(0, -1)
-  if ((p.port === '80' && p.protocol === 'ws:') || (p.port === '443' && p.protocol === 'wss:')) p.port = ''
-  p.searchParams.sort()
-  p.hash = ''
-  return p.toString()
+  let destUrl = url;
+
+  if (url.indexOf("://") === -1) {
+    destUrl = `wss://${url}`;
+  }
+
+  const p = new URL(destUrl);
+
+  p.pathname = p.pathname.replace(/\/+/g, "/");
+  if (p.pathname.endsWith("/")) p.pathname = p.pathname.slice(0, -1);
+  if (
+    (p.port === "80" && p.protocol === "ws:") ||
+    (p.port === "443" && p.protocol === "wss:")
+  )
+    p.port = "";
+  p.searchParams.sort();
+  p.hash = "";
+  return p.toString();
 }
 
 export function getHex64(json: string, field: string): string {
-  let len = field.length + 3
-  let idx = json.indexOf(`"${field}":`) + len
-  let s = json.slice(idx).indexOf(`"`) + idx + 1
-  return json.slice(s, s + 64)
+  const len = field.length + 3;
+  const idx = json.indexOf(`"${field}":`) + len;
+  const s = json.slice(idx).indexOf(`"`) + idx + 1;
+  return json.slice(s, s + 64);
 }
 
-
 export function getSubscriptionId(json: string): string | null {
-  let idx = json.slice(0, 22).indexOf(`"EVENT"`)
-  if (idx === -1) return null
+  const idx = json.slice(0, 22).indexOf(`"EVENT"`);
+  if (idx === -1) return null;
 
-  let pstart = json.slice(idx + 7 + 1).indexOf(`"`)
-  if (pstart === -1) return null
-  let start = idx + 7 + 1 + pstart
+  const pstart = json.slice(idx + 7 + 1).indexOf(`"`);
+  if (pstart === -1) return null;
+  const start = idx + 7 + 1 + pstart;
 
-  let pend = json.slice(start + 1, 80).indexOf(`"`)
-  if (pend === -1) return null
-  let end = start + 1 + pend
+  const pend = json.slice(start + 1, 80).indexOf(`"`);
+  if (pend === -1) return null;
+  const end = start + 1 + pend;
 
-  return json.slice(start + 1, end)
+  return json.slice(start + 1, end);
 }
 
 export { secureGenerateRandom };

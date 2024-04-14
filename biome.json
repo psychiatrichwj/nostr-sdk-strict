@@ -16,7 +16,8 @@
         "noNonNullAssertion": "warn"
       },
       "suspicious": {
-        "noConsoleLog": "warn"
+        "noConsoleLog": "warn",
+        "noExplicitAny": "warn"
       },
       "complexity": {
         "noExcessiveCognitiveComplexity": "off"

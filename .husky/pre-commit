@@ -1,0 +1,5 @@
+# Run test
+pnpm test
+
+# Run link
+pnpm run lint
