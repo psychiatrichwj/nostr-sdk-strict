@@ -5,6 +5,18 @@ on:
     branches:
       - 'main'
 jobs:
+  semantic-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install -g pnpm
+      - run: pnpm install
+      - run: npx semantic-release
+
+
   run-tests:
     env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -16,7 +28,7 @@ jobs:
         with:
           node-version: '20'
       - run: echo $GITHUB_WORKFLOW
-      - run: echo $GH_TOKEN      
+      - run: echo $GH_TOKEN
       - run: echo $GH_TOKEN
       - run: echo $NPM_TOKEN
       - run: npm config set '//registry.npmjs.org/:_authToken' "${NPM_TOKEN}"
